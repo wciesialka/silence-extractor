@@ -67,6 +67,7 @@ def translate(value, from_min, from_max, to_min, to_max):
         return translated
 
 SILENCE = -99.5
+LOUDEST = 99.5
 
 def to_db(amplitude):
     return 10 * math.log(amplitude)
@@ -104,9 +105,11 @@ def main():
 
     audio = AudioSegment.from_file(audio_path)
 
-    threshold = dialog.float_input_dialog("Upper Silence Threshold","Silence Extractor",minvalue=0,maxvalue=1)
-    if threshold == None:
+    threshold_ratio = dialog.float_input_dialog("Upper Silence Threshold (0.0-1.0)","Silence Extractor",minvalue=0,maxvalue=1)
+    if threshold_ratio == None:
         raise SystemExit
+
+    threshold = LOUDEST*threshold_ratio
 
     new_audio = AudioSegment.empty()
     for i in range(1,framecount):
@@ -114,8 +117,7 @@ def main():
         end = i * millis_per_frame
         clip = audio[start:end]
         volume = to_db(clip.max)
-        percentage = translate(volume,0,99.5,0,1)
-        if percentage > threshold:
+        if volume > threshold:
             remove_frame(i,temp_dir_name)
         else:
             new_audio += clip
