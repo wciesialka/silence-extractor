@@ -13,7 +13,7 @@ def ask_for_file():
     video_path = None
     while not file_selected:
         video_path = dialog.open_dialog("Open Video File",(("MP4 files (.mp4)","*.mp4"),("All Files","*.*")))
-        if video_path == None:
+        if video_path == None or video_path == "" or video_path == ():
             raise SystemExit # user clicked cancel, exit program
         file_selected = dialog.yes_no_dialog("Use video file\n\"" + video_path + "\"\nin Silence Extractor?","Silence Extractor")
     return video_path
@@ -133,7 +133,7 @@ def main():
     stream = ffmpeg.output(frames_stream,audio_stream,new_video_path)
     stream.run()
 
-    
+    dialog.info_dialog(message="Video saving done!",caption="Silence Extractor")
 
 if __name__ == "__main__":
     main()
