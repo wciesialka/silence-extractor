@@ -68,6 +68,9 @@ def translate(value, from_min, from_max, to_min, to_max):
 
 SILENCE = -99.5
 
+def to_db(amplitude):
+    return 10 * math.log(amplitude)
+
 def delete_file(filepath):
     if os.path.exists(filepath):
         os.remove(filepath)
@@ -110,8 +113,8 @@ def main():
         start = (i-1) * millis_per_frame
         end = i * millis_per_frame
         clip = audio[start:end]
-        volume = clip.max_dBFS
-        percentage = translate(volume,SILENCE,0,0,1)
+        volume = to_db(clip.max)
+        percentage = translate(volume,0,99.5,0,1)
         if percentage > threshold:
             remove_frame(i,temp_dir_name)
         else:
