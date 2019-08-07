@@ -128,6 +128,9 @@ def main():
 
     new_video_path = dialog.save_dialog("Save Video File",(("MP4 files (.mp4)","*.mp4"),("All Files","*.*")))
 
+    if new_video_path == None or new_video_path == "" or new_video_path == ():
+        raise SystemExit # user clicked cancel, exit program
+
     frames_stream = ffmpeg.input(temp_dir_name+ "/*.jpg", pattern_type='glob', framerate=fps)
     audio_stream = ffmpeg.input(new_audio_path)
     stream = ffmpeg.output(frames_stream,audio_stream,new_video_path)
