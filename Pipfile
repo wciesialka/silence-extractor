@@ -7,8 +7,8 @@ verify_ssl = true
 pylint = "*"
 
 [packages]
-wxpython = "*"
 ffmpeg-python = "*"
+pydub = "*"
 
 [requires]
 python_version = "3.7"
