@@ -13,6 +13,9 @@ def save_dialog(caption="Save File",wildcard="All Files|*.*",defaultDir=""):
 def info_dialog(message,caption=""):
     return messagebox.showinfo(title=caption,message=message)
 
+def error_dialog(message,caption=""):
+    return messagebox.showerror(title=caption,message=message)
+
 def yes_no_dialog(message,caption=""):
     return messagebox.askyesno(title=caption,message=message)
 
