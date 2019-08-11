@@ -1,9 +1,21 @@
 # silence-extractor
+
 Removes any parts of a video with a volume over a certain threshold, leaving only the silent parts of the video.
 
 ## requirements
 
+* ffmpeg
 * Python 3.7+
-* TKinter
-* pydub
-* ffmpeg-python
+* requirements from [requirements.txt](requirements.txt)
+
+## running
+
+Either run using `pipenv run python main.py` or run `pip install --user -r requirements.txt` to install dependencies followed by `python main.py`. I found that ffmpeg may not run correctly when using `pipenv`, so I suggest the second option.
+
+## license
+
+Check [LICENSE](LICENSE) for details
+
+## authors
+
+* William Ciesialka

@@ -73,7 +73,7 @@ def remove_frame(frame_number,frame_dir_path):
     filepath = os.path.join(frame_dir_path,filename)
     delete_file(filepath)
 
-def extract(input_path,output_path,threshold_ratio=0.7):
+def extract(input_path,output_path,threshold_ratio=0.7,invert=False):
     video_name = get_filename_from_path(input_path)
 
     temp_dir = tempfile.TemporaryDirectory(suffix="_"+video_name)
@@ -101,7 +101,7 @@ def extract(input_path,output_path,threshold_ratio=0.7):
         end = i * millis_per_frame
         clip = audio[start:end]
         volume = to_db(clip.max)
-        if volume > threshold:
+        if ((not invert) and volume >= threshold) or (invert and volume <= threshold):
             remove_frame(i,temp_dir_name)
         else:
             new_audio += clip
