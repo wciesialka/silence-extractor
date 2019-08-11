@@ -31,7 +31,7 @@ class GUI(tk.Frame):
             if not os.path.exists(self.inputPath):
                 dialog.error_dialog("Input file must exist!", caption="Error")
             else:
-                success = extractor.extract(self.inputPath,self.outputPath,self.threshold)
+                success = extractor.extract(self.inputPath,self.outputPath,self.threshold,self.mode.get()==2)
                 if success:
                     dialog.info_dialog("File successfully created!",caption="Silence Extractor")
                 else:
@@ -53,17 +53,27 @@ class GUI(tk.Frame):
         self.selectOutputPath.grid(row=1,column=2)
 
 
-        tk.Label(self, text="Threshold: ", anchor=tk.W, font=("Courier", 11)).grid(row=2)
+        tk.Label(self, text="Threshold: ", anchor=tk.W, font=("Courier", 11)).grid(row=2,column=0)
         self.threshold = 0.0
         self.thresholdSlider = tk.Scale(self, from_=0.0, to=1.0, resolution=0.01, orient=tk.HORIZONTAL, length=400, command=self.update_threshold)
         self.thresholdSlider.grid(row=2,columnspan=2,column=1)
 
-        self.actButton = tk.Button(self,text="Extract",font=("Courier", 11),command=self.act,width=8,height=1)
-        self.actButton.grid(row=3,column=1)
+        tk.Label(self, text="Mode: ", anchor=tk.W, font=("Courier", 11)).grid(row=3,column=0)
+        self.modeAradio = tk.Radiobutton(self,text="Lower Threshold",variable=self.mode,value=2)
+        self.modeBradio = tk.Radiobutton(self,text="Upper Threshold",variable=self.mode,value=1)
+        self.modeAradio.grid(row=3,column=1)
+        self.modeBradio.grid(row=3,column=2)
+
+        self.actButton = tk.Button(self,text="Run",font=("Courier", 11),command=self.act,width=8,height=1)
+        self.actButton.grid(row=4,column=1)
 
 
     def __init__(self, master=None):
         tk.Frame.__init__(self, master)
+
+        self.mode = tk.IntVar(master)
+        self.mode.set(1)
+
         self.pack(padx=5, pady=5)
         master.title("Silence Extractor")
         self.create_widgets()
