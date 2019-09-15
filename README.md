@@ -10,7 +10,7 @@ Removes any parts of a video with a volume over a certain threshold, leaving onl
 
 ## running
 
-Either run using `pipenv run python main.py` or run `pip install --user -r requirements.txt` to install dependencies followed by `python main.py`. I found that ffmpeg may not run correctly when using `pipenv`, so I suggest the second option.
+Either run using `pipenv run python main.py` or run `pip3 install --user -r requirements.txt` to install dependencies followed by `python3 main.py`. I found that ffmpeg may not run correctly when using `pipenv`, so I suggest the second option.
 
 ## license
 
