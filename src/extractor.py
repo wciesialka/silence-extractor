@@ -59,7 +59,12 @@ SILENCE = -99.5
 LOUDEST = 99.5
 
 def to_db(amplitude):
-    return 10 * math.log(amplitude)
+    try:
+        db = 10 * math.log(amplitude)
+    except:
+        return 0
+    else:
+        return db
 
 def delete_file(filepath):
     if os.path.exists(filepath):
