@@ -18,4 +18,4 @@ Check [LICENSE](LICENSE) for details
 
 ## authors
 
-* William Ciesialka
+* Willow Ciesialka
